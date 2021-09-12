@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail page</title>
+</head>
+<body>
+
+<div>
+
+    {% if question.choice_set.all %}
+        <form method="POST" action="{% url 'polls:vote' question.id %}">
+        {% csrf_token %}
+        <ul>
+            <h3>{{ question.question_text }}</h3>
+            {% for choice in question.choice_set.all %}
+            <div>
+                <input type="radio" id="choice{{ choice.id }}" name="choice" value="{{ choice.id }}"/>
+                <label for="choice{{ choice.id }}">{{ choice.choice_text }}</label><br>
+
+            </div>
+            {% endfor %}
+        </ul>
+        <input type="submit"  value="submit vote" id="submit-choice" />
+        </form>
+    {% else %}
+     <p>no choices are available</p>
+    {% endif%}
+</div>
+
+</body>
+</html>

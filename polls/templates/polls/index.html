@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index page</title>
+    <link rel ='stylesheet' href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div>
+    <h1>choose any question....</h1>
+
+    {% if question_list %}
+    <ol>
+     {% for question in question_list %}
+        <li>
+            <a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a>
+        </li>
+        {% endfor %}
+    </ol>
+    {% else %}
+        <p>No question to display</p>
+    {% endif %}
+</div>
+</body>
+</html>
